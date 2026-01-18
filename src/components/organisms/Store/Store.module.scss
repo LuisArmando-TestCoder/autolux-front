@@ -1,0 +1,50 @@
+@use '../../../styles/variables' as v;
+
+.section {
+  padding: v.$spacing-unit * 12 0;
+  background: v.$bg-color;
+  min-height: 100vh;
+}
+
+.categorySection {
+  margin-bottom: v.$spacing-unit * 10;
+}
+
+.categoryTitle {
+  font-size: 2.5rem;
+  color: v.$text-light;
+  margin-bottom: v.$spacing-unit * 6;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+
+  &::after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 4px;
+    background: v.$accent-color;
+    margin: v.$spacing-unit auto 0;
+    border-radius: 2px;
+  }
+}
+
+.brandSection {
+  margin-bottom: v.$spacing-unit * 6;
+}
+
+.brandTitle {
+  font-size: 1.8rem;
+  color: v.$accent-gold;
+  margin-bottom: v.$spacing-unit * 3;
+  padding-left: v.$spacing-unit * 2;
+  border-left: 4px solid v.$accent-color;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: v.$spacing-unit * 4;
+}

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './Navbar.module.scss';
 import Image from 'next/image';
 import Button from '../../atoms/Button';
+import Link from 'next/link';
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -41,10 +42,11 @@ const Navbar: React.FC = () => {
           />
         </div>
         <div className={styles.links}>
-          <a href="#services" className={styles.link}>Servicios</a>
-          <a href="#gallery" className={styles.link}>Galería</a>
-          <a href="#reviews" className={styles.link}>Reseñas</a>
-          <a href="#faq" className={styles.link}>FAQ</a>
+          <a href="/#services" className={styles.link}>Servicios</a>
+          <a href="/#gallery" className={styles.link}>Galería</a>
+          <a href="/#reviews" className={styles.link}>Reseñas</a>
+          <a href="/#faq" className={styles.link}>FAQ</a>
+          <Link href="/store" className={styles.link}>Tienda</Link>
         </div>
         <div className={styles.cta}>
             <Button label="Cotizar" variant="primary" onClick={() => window.open('https://wa.me/50684196936', '_blank')} />

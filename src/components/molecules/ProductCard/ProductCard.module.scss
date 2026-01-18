@@ -1,0 +1,60 @@
+@use '../../../styles/variables' as v;
+
+.card {
+  background: v.$primary-light;
+  border-radius: v.$border-radius-md;
+  padding: v.$spacing-unit * 3;
+  transition: v.$transition-default;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: v.$shadow-lg;
+    border-color: rgba(v.$accent-color, 0.3);
+  }
+}
+
+.header {
+  margin-bottom: v.$spacing-unit * 2;
+}
+
+.category {
+  font-size: 0.8rem;
+  color: v.$accent-color;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: v.$spacing-unit;
+  font-weight: v.$font-weight-bold;
+}
+
+.title {
+  font-size: 1.25rem;
+  color: v.$text-light;
+  font-weight: v.$font-weight-bold;
+  line-height: 1.4;
+}
+
+.techSpec {
+  color: v.$text-dim;
+  font-size: 0.95rem;
+  margin-bottom: v.$spacing-unit * 3;
+  flex-grow: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.type {
+  font-size: 0.8rem;
+  color: v.$text-dim;
+  background: rgba(v.$text-dim, 0.1);
+  padding: 4px 8px;
+  border-radius: v.$border-radius-sm;
+}
