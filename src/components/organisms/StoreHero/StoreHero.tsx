@@ -1,13 +1,19 @@
 import React from 'react';
 import styles from './StoreHero.module.scss';
 import Image from 'next/image';
+import { useSettings } from '../../../context/SettingsContext';
+import { safeDecode } from '../../../utils/textUtils';
 
 const StoreHero: React.FC = () => {
+  const { settings } = useSettings();
+
+  if (!settings) return null;
+
   return (
     <section className={styles.hero}>
       <div className={styles.background}>
         <Image 
-          src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
+          src={safeDecode(settings.store_hero_image.imgix_url || settings.store_hero_image.url)} 
           alt="Luxury car detailing products" 
           fill
           priority
@@ -17,10 +23,10 @@ const StoreHero: React.FC = () => {
       <div className={styles.overlay} />
       <div className={styles.content}>
         <h1 className={styles.title}>
-          Tienda de <span>Productos Premium</span>
+          {safeDecode(settings.store_hero_title)} <span>{safeDecode(settings.store_hero_title_highlight)}</span>
         </h1>
         <p className={styles.subtitle}>
-          Encuentra los mejores productos para el cuidado de tu vehículo, seleccionados por nuestros expertos.
+          {safeDecode(settings.store_hero_subtitle)}
         </p>
       </div>
     </section>

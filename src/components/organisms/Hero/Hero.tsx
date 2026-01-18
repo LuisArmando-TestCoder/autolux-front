@@ -3,14 +3,20 @@ import styles from './Hero.module.scss';
 import Button from '../../atoms/Button';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useSettings } from '../../../context/SettingsContext';
+import { safeDecode } from '../../../utils/textUtils';
 
 const Hero: React.FC = () => {
   const router = useRouter();
+  const { settings } = useSettings();
+
+  if (!settings) return null;
+
   return (
     <section className={styles.hero}>
       <div className={styles.background}>
         <Image 
-          src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
+          src={safeDecode(settings.hero_image.imgix_url || settings.hero_image.url)} 
           alt="Luxury car detailing" 
           fill
           priority
@@ -20,15 +26,15 @@ const Hero: React.FC = () => {
       <div className={styles.overlay} />
       <div className={styles.content}>
         <h1 className={styles.title}>
-          Devolvemos el <span>brillo de agencia</span> a tu vehículo
+          {safeDecode(settings.hero_title_part1)} <span>{safeDecode(settings.hero_title_highlight)}</span> {safeDecode(settings.hero_title_part2)}
         </h1>
         <p className={styles.subtitle}>
-          Protección cerámica de grado industrial, enderezado y pintura con los más altos estándares de calidad en Costa Rica.
+          {safeDecode(settings.hero_subtitle)}
         </p>
         <div className={styles.actions}>
-          <Button label="Cotizar mi detallado ahora" variant="glow" onClick={() => window.open('https://wa.me/50684196936?text=' + encodeURIComponent('Hola, quisiera cotizar mi detallado.'), '_blank')} />
-          <Button label="Ver nuestros servicios" variant="secondary" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} />
-          <Button label="Ir a la Tienda" variant="primary" onClick={() => router.push('/store')} />
+          <Button label={safeDecode(settings.quote_button_label)} variant="glow" onClick={() => window.open(settings.quote_button_link, '_blank')} />
+          <Button label={safeDecode(settings.services_button_label)} variant="secondary" onClick={() => document.getElementById(settings.services_button_anchor)?.scrollIntoView({ behavior: 'smooth' })} />
+          <Button label={safeDecode(settings.store_button_label)} variant="primary" onClick={() => router.push(settings.store_button_route)} />
         </div>
       </div>
     </section>

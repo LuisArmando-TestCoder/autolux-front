@@ -7,8 +7,14 @@ import Button from '../../atoms/Button';
 import Link from 'next/link';
 import { useCart } from '../../../context/CartContext';
 import { FaShoppingCart } from 'react-icons/fa';
+import { useSettings } from '../../../context/SettingsContext';
+import { safeDecode } from '../../../utils/textUtils';
 
 const Navbar: React.FC = () => {
+  const { settings } = useSettings();
+
+  if (!settings) return null;
+
   const { toggleCart, cart } = useCart();
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
   const [scrolled, setScrolled] = useState(false);
@@ -36,14 +42,17 @@ const Navbar: React.FC = () => {
     <nav className={`${styles.navbar} ${scrolled ? styles['navbar--scrolled'] : ''} ${hidden ? styles['navbar--hidden'] : ''}`}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          <Image 
-            src="/logo.png" 
-            alt="Autolux Logo" 
-            width={120} 
-            height={40} 
-            priority
-            style={{ width: 'auto', height: '40px' }}
-          />
+          {settings.footer_logo ? (
+            <Image 
+              src={safeDecode(settings.footer_logo.imgix_url || settings.footer_logo.url)} 
+              alt="Autolux Logo" 
+              width={150} 
+              height={50} 
+              style={{ width: 'auto', height: 'auto', maxHeight: '60px' }} 
+            />
+          ) : (
+            <Image src="/logo.png" alt="Autolux Logo" width={150} height={50} style={{ width: 'auto', height: 'auto', maxHeight: '60px' }} />
+          )}
         </div>
         <div className={styles.links}>
           <a href="/#services" className={styles.link}>Servicios</a>

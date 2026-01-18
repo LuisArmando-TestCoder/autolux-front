@@ -1,18 +1,24 @@
 import React from 'react';
 import styles from './Trust.module.scss';
-import { Si3M } from 'react-icons/si';
+import { useSettings } from '../../../context/SettingsContext';
+import { safeDecode } from '../../../utils/textUtils';
 
 const Trust: React.FC = () => {
+  const { settings } = useSettings();
+
+  if (!settings) return null;
+
   return (
     <section className={styles.section}>
-      <h4 className={styles.title}>Trabajamos con las mejores marcas</h4>
+      <h4 className={styles.title}>{safeDecode(settings.trust_title)}</h4>
       <div className={styles.scroller}>
-        {[...Array(10)].map((_, i) => (
+        {/* Duplicating the list to ensure smooth infinite scrolling animation if needed, 
+            or just mapping once if css handles it. Assuming infinite scroll needs duplication */}
+        {[...Array(2)].map((_, i) => (
             <React.Fragment key={i}>
-                <div className={styles.logo}><Si3M /> 3M Science. Applied to Life.™</div>
-                <div className={styles.logo}>Diamond ProTech</div>
-                <div className={styles.logo}>Icon Rocklear</div>
-                <div className={styles.logo}>Meguiar's</div>
+                {settings.trust_brands.map((brand, index) => (
+                   <div key={`${i}-${index}`} className={styles.logo}>{safeDecode(brand)}</div>
+                ))}
             </React.Fragment>
         ))}
       </div>
