@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
             <Image 
               src={safeDecode(settings.footer_logo.imgix_url || settings.footer_logo.url)} 
               alt="Autolux Logo" 
-              width={150} 
+              width={150}
               height={50} 
               style={{ width: 'auto', height: 'auto', maxHeight: '60px' }} 
             />

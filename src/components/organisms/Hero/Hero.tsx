@@ -15,18 +15,22 @@ const Hero: React.FC = () => {
   return (
     <section className={styles.hero}>
       <div className={styles.background}>
-        <Image 
-          src={safeDecode(settings.hero_image.imgix_url || settings.hero_image.url)} 
-          alt="Luxury car detailing" 
+        <Image
+          src={safeDecode(settings.hero_image.imgix_url || settings.hero_image.url)}
+          alt="Luxury car detailing"
           fill
           priority
-          style={{objectFit: 'cover'}}
+          style={{ objectFit: 'cover' }}
         />
       </div>
       <div className={styles.overlay} />
       <div className={styles.content}>
         <h1 className={styles.title}>
-          {safeDecode(settings.hero_title_part1)} <span>{safeDecode(settings.hero_title_highlight)}</span> {safeDecode(settings.hero_title_part2)}
+          {safeDecode(settings.hero_title_part1)} 
+          <br /> 
+          <span>{safeDecode(settings.hero_title_highlight)}</span> 
+          <br /> 
+          {safeDecode(settings.hero_title_part2)}
         </h1>
         <p className={styles.subtitle}>
           {safeDecode(settings.hero_subtitle)}
