@@ -1,0 +1,57 @@
+@use '../../../styles/variables' as v;
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-unit;
+  background: rgba(v.$text-dim, 0.1);
+  padding: 4px;
+  border-radius: v.$border-radius-sm;
+}
+
+.button {
+  background: transparent;
+  border: none;
+  color: v.$text-light;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: v.$transition-fast;
+  font-weight: bold;
+  font-size: 1.2rem;
+
+  &:hover {
+    color: v.$accent-color;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.input {
+  width: 30px;
+  background: transparent;
+  border: none;
+  color: v.$text-light;
+  text-align: center;
+  font-family: v.$font-family-sans;
+  font-weight: v.$font-weight-medium;
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
           Protección cerámica de grado industrial, enderezado y pintura con los más altos estándares de calidad en Costa Rica.
         </p>
         <div className={styles.actions}>
-          <Button label="Cotizar mi detallado ahora" variant="glow" onClick={() => window.open('https://wa.me/50684196936', '_blank')} />
+          <Button label="Cotizar mi detallado ahora" variant="glow" onClick={() => window.open('https://wa.me/50684196936?text=' + encodeURIComponent('Hola, quisiera cotizar mi detallado.'), '_blank')} />
           <Button label="Ver nuestros servicios" variant="secondary" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} />
           <Button label="Ir a la Tienda" variant="primary" onClick={() => router.push('/store')} />
         </div>

@@ -6,8 +6,8 @@ import styles from './FloatingWhatsapp.module.scss';
 
 const FloatingWhatsapp: React.FC = () => {
   const handleClick = () => {
-    // Replace with actual number
-    window.open('https://wa.me/50684196936', '_blank');
+    const message = 'Hola, quisiera más información sobre sus servicios.';
+    window.open(`https://wa.me/50684196936?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (

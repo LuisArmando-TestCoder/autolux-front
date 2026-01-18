@@ -5,8 +5,12 @@ import styles from './Navbar.module.scss';
 import Image from 'next/image';
 import Button from '../../atoms/Button';
 import Link from 'next/link';
+import { useCart } from '../../../context/CartContext';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const Navbar: React.FC = () => {
+  const { toggleCart, cart } = useCart();
+  const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
@@ -49,7 +53,11 @@ const Navbar: React.FC = () => {
           <Link href="/store" className={styles.link}>Tienda</Link>
         </div>
         <div className={styles.cta}>
-            <Button label="Cotizar" variant="primary" onClick={() => window.open('https://wa.me/50684196936', '_blank')} />
+            <button className={styles.cartButton} onClick={toggleCart} aria-label="Open Cart">
+              <FaShoppingCart />
+              {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
+            </button>
+            <Button label="Cotizar" variant="primary" onClick={() => window.open('https://wa.me/50684196936?text=' + encodeURIComponent('Hola, quisiera cotizar un servicio.'), '_blank')} />
         </div>
       </div>
     </nav>
