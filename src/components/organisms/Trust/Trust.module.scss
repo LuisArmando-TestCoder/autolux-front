@@ -1,0 +1,81 @@
+@use '../../../styles/variables' as v;
+
+.section {
+  padding: v.$spacing-unit * 8 0;
+  background: rgba(v.$white, 0.05);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(v.$white, 0.05);
+  position: relative;
+  
+  // Fade effect on sides
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, v.$bg-color, transparent);
+  }
+  
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, v.$bg-color, transparent);
+  }
+}
+
+.title {
+  text-align: center;
+  color: v.$text-dim;
+  margin-bottom: v.$spacing-unit * 6;
+  font-size: 0.9rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: v.$font-weight-bold;
+  opacity: 0.7;
+}
+
+.scroller {
+  display: flex;
+  gap: v.$spacing-unit * 12;
+  animation: scroll 40s linear infinite;
+  width: max-content;
+  
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: v.$font-weight-bold;
+  color: v.$text-dim;
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-unit * 2;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  cursor: default;
+  filter: grayscale(100%);
+
+  &:hover {
+    opacity: 1;
+    color: v.$white;
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+  
+  svg {
+    font-size: 2.5rem;
+  }
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

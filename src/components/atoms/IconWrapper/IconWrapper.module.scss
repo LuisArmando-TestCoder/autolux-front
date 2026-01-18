@@ -1,0 +1,42 @@
+@use '../../../styles/variables' as v;
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(v.$accent-color, 0.05);
+  color: v.$accent-color;
+  font-size: 2rem;
+  margin-bottom: v.$spacing-unit * 3;
+  transition: v.$transition-default;
+  border: 1px solid rgba(v.$accent-color, 0.2);
+  position: relative;
+  
+  // Glow effect behind
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: v.$accent-color;
+    opacity: 0;
+    filter: blur(15px);
+    transition: v.$transition-default;
+    z-index: -1;
+  }
+
+  &:hover {
+    background: v.$accent-color;
+    color: v.$white;
+    transform: translateY(-5px) scale(1.05);
+    border-color: v.$accent-color;
+    box-shadow: 0 10px 20px -5px rgba(v.$accent-color, 0.4);
+
+    &::before {
+      opacity: 0.4;
+    }
+  }
+}

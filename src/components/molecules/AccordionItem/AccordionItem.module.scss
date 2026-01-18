@@ -1,0 +1,54 @@
+@use '../../../styles/variables' as v;
+
+.item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: v.$spacing-unit;
+  background: transparent;
+  transition: v.$transition-default;
+  border-radius: v.$border-radius-sm;
+
+  &:hover {
+    background: rgba(v.$white, 0.02);
+  }
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: v.$spacing-unit * 2.5 v.$spacing-unit * 2;
+  background: transparent;
+  border: none;
+  color: v.$text-light;
+  font-size: 1.1rem;
+  font-weight: v.$font-weight-medium;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: v.$accent-color;
+  }
+}
+
+.icon {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: v.$accent-color;
+  font-size: 0.9rem;
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+.content {
+  overflow: hidden;
+}
+
+.inner {
+  padding: 0 v.$spacing-unit * 2 v.$spacing-unit * 3;
+  color: v.$text-dim;
+  line-height: 1.7;
+  font-size: 1rem;
+}

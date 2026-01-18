@@ -1,0 +1,37 @@
+@use '../../../styles/variables' as v;
+
+.wrapper {
+  margin-bottom: v.$spacing-unit * 8;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: v.$font-weight-black;
+  color: v.$text-light;
+  margin-bottom: v.$spacing-unit * 2;
+  position: relative;
+  display: inline-block;
+  
+  // Optional: Gradient text effect
+  // @include v.text-gradient; 
+  // Kept white for contrast, but can enable if desired.
+
+  &::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, v.$accent-color, transparent);
+    margin: v.$spacing-unit * 2 auto 0;
+    border-radius: v.$border-radius-sm;
+  }
+}
+
+.subtitle {
+  color: v.$text-dim;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}

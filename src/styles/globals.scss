@@ -1,0 +1,73 @@
+@use 'reset';
+@use 'sass:color';
+@use 'variables' as v;
+
+html {
+  scroll-behavior: smooth;
+  font-family: v.$font-family-sans;
+}
+
+body {
+  background-color: v.$bg-color;
+  color: v.$text-light;
+  overflow-x: hidden;
+  line-height: 1.6;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(v.$accent-color, 0.08), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(v.$primary-light, 0.05), transparent 25%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background-color: rgba(v.$accent-color, 0.3);
+  color: v.$white;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: v.$primary-dark;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(v.$text-dim, 0.5);
+  border-radius: 10px;
+  border: 2px solid v.$primary-dark;
+  
+  &:hover {
+    background: v.$accent-color;
+  }
+}
+
+// Utility classes
+.container {
+  max-width: v.$container-width;
+  margin: 0 auto;
+  padding: 0 (v.$spacing-unit * 3);
+}
+
+.text-gradient {
+  @include v.text-gradient;
+}
+
+// Global reset/base styles updates
+a {
+  color: v.$accent-color;
+  text-decoration: none;
+  transition: v.$transition-default;
+  
+  &:hover {
+    color: color.scale(v.$accent-color, $lightness: 10%);
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: v.$font-weight-bold;
+  line-height: 1.2;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

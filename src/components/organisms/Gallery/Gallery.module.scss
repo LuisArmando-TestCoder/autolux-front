@@ -1,0 +1,19 @@
+@use '../../../styles/variables' as v;
+
+.section {
+  padding: v.$spacing-unit * 12 0;
+  background: linear-gradient(to bottom, v.$primary-dark, v.$bg-color);
+  position: relative;
+  
+  // Subtle glow
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle at 80% 80%, rgba(v.$accent-color, 0.05), transparent 60%);
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,15 @@
+@use '../../../styles/variables' as v;
+
+.section {
+  padding: v.$spacing-unit * 12 0;
+  background: v.$bg-color;
+}
+
+.wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(v.$primary-light, 0.3);
+  padding: v.$spacing-unit * 4;
+  border-radius: v.$border-radius-lg;
+  border: 1px solid rgba(v.$white, 0.05);
+}

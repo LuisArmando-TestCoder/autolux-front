@@ -1,0 +1,80 @@
+@use '../../../styles/variables' as v;
+
+.card {
+  @include v.glass-panel;
+  padding: v.$spacing-unit * 4;
+  border-radius: v.$border-radius-lg;
+  min-width: 300px;
+  max-width: 400px;
+  margin: 0 v.$spacing-unit * 2;
+  transition: v.$transition-default;
+  position: relative;
+  background: rgba(v.$white, .0); // Lighter glass
+  border: 1px solid rgba(v.$white, 0.8);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 0 20px rgba(255, 255, 255, 0.5); // Inner glow
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.1),
+      0 0 0 1px v.$accent-color; // Glow border on hover
+    background: rgba(v.$white, 1);
+
+    .name {
+      color: v.$bg-color;
+    }
+
+    .stars {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column; // Name above stars
+  align-items: flex-start;
+  margin-bottom: v.$spacing-unit * 2;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: v.$spacing-unit * 2;
+}
+
+.name {
+  font-weight: v.$font-weight-black;
+  color: v.$text-light;
+  font-size: 1.2rem;
+  letter-spacing: -0.5px;
+  margin-bottom: calc(v.$spacing-unit / 2);
+}
+
+.stars {
+  display: flex;
+  gap: 4px; // Horizontal spacing
+  color: v.$accent-gold;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(251, 191, 36, 0.3));
+}
+
+.text {
+  color: v.$text-dim;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  position: relative;
+  
+  // Big quote mark
+  &::before {
+    content: '"';
+    font-size: 4rem;
+    color: rgba(v.$accent-color, 0.1);
+    position: absolute;
+    top: -30px;
+    left: -10px;
+    font-family: serif;
+    z-index: -1;
+  }
+}
