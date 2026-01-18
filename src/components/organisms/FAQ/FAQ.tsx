@@ -25,8 +25,8 @@ const FAQ: React.FC = () => {
           {settings.faq_items.map((item, index) => (
             <AccordionItem 
               key={index}
-              question={safeDecode(item.question)}
-              answer={safeDecode(item.answer)}
+              question={safeDecode(item.nombre_de_marca)}
+              answer={safeDecode(item.respuesta)}
               isOpen={openIndex === index}
               onClick={() => handleClick(index)}
             />

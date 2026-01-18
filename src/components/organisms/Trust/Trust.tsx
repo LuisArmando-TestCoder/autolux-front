@@ -16,8 +16,8 @@ const Trust: React.FC = () => {
             or just mapping once if css handles it. Assuming infinite scroll needs duplication */}
         {[...Array(2)].map((_, i) => (
             <React.Fragment key={i}>
-                {settings.trust_brands.map((brand, index) => (
-                   <div key={`${i}-${index}`} className={styles.logo}>{safeDecode(brand)}</div>
+                {settings.trust_brands.map((brandObj, index) => (
+                   <div key={`${i}-${index}`} className={styles.logo}>{safeDecode(brandObj.brand)}</div>
                 ))}
             </React.Fragment>
         ))}

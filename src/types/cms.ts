@@ -1,6 +1,6 @@
 export interface FAQItem {
-  question: string;
-  answer: string;
+  nombre_de_marca: string;
+  respuesta: string;
 }
 
 export interface FooterLink {
@@ -26,7 +26,7 @@ export interface SettingsMetadata {
   store_button_label: string;
   store_button_route: string;
   trust_title: string;
-  trust_brands: string[];
+  trust_brands: { brand: string }[];
   faq_title: string;
   faq_items: FAQItem[];
   store_hero_image: CosmicImage;
