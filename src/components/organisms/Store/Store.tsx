@@ -15,6 +15,11 @@ interface ProductMetadata {
     value: string;
   };
   tech_spec: string;
+  price?: number;
+  product_image?: {
+    url: string;
+    imgix_url: string;
+  };
 }
 
 interface ProductObject {
@@ -58,7 +63,9 @@ const Store: React.FC = () => {
               product: obj.title,
               category: obj.metadata.category,
               type: obj.metadata.product_type.value,
-              tech_spec: obj.metadata.tech_spec
+              tech_spec: obj.metadata.tech_spec,
+              price: obj.metadata.price,
+              image: obj.metadata.product_image?.imgix_url || obj.metadata.product_image?.url
             });
           });
           

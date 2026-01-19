@@ -3,6 +3,8 @@ export interface Product {
   category: string;
   type: string;
   tech_spec: string;
+  price?: number;
+  image?: string;
 }
 
 export const inventory = {
