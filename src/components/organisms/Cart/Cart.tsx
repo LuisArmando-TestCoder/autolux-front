@@ -6,7 +6,7 @@ import AmountInput from '../../atoms/AmountInput';
 import { FaTimes } from 'react-icons/fa';
 
 const Cart: React.FC = () => {
-  const { cart, isCartOpen, toggleCart, updateQuantity } = useCart();
+  const { cart, isCartOpen, toggleCart, updateQuantity, clearCart } = useCart();
   const cartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,8 +22,19 @@ const Cart: React.FC = () => {
   const handleCheckout = () => {
     if (cart.length === 0) return;
 
+    const formatPrice = (price: number) => {
+      return new Intl.NumberFormat('es-CR', { style: 'currency', currency: 'CRC', maximumFractionDigits: 0 }).format(price).replace('CRC', '₡');
+    };
+
+    const totalAmount = cart.reduce((sum, item) => sum + (item.product.price || 0) * item.quantity, 0);
+    const formattedTotal = formatPrice(totalAmount);
+
     const message = "Hola, me gustaría ordenar los siguientes productos:\n\n" +
-      cart.map(item => `- ${item.quantity}x ${item.product.product}`).join('\n') +
+      cart.map(item => {
+        const price = item.product.price || 0;
+        return `- ${item.quantity}x ${item.product.product} (${formatPrice(price)})`;
+      }).join('\n') +
+      `\n\nTotal: ${formattedTotal}` +
       "\n\nQuedo atento a la cotización y método de pago.";
     
     window.open(`https://wa.me/50684196936?text=${encodeURIComponent(message)}`, '_blank');
@@ -64,12 +75,20 @@ const Cart: React.FC = () => {
 
         <div className={styles.footer}>
           {cart.length > 0 && (
-            <Button 
-              label="Realizar Pedido" 
-              variant="glow" 
-              onClick={handleCheckout} 
-              style={{ width: '100%' }}
-            />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
+              <Button 
+                label="Realizar Pedido" 
+                variant="glow" 
+                onClick={handleCheckout} 
+                style={{ width: '100%' }}
+              />
+              <Button 
+                label="Vaciar Carrito" 
+                variant="secondary" 
+                onClick={clearCart} 
+                style={{ width: '100%' }}
+              />
+            </div>
           )}
         </div>
       </aside>
