@@ -174,7 +174,9 @@ const Store: React.FC = () => {
                   <h3 className={styles.brandTitle}>{formatKey(categoryKey)}</h3>
                   <div className={styles.grid}>
                     {products.map((product, index) => (
-                      <ProductCard key={`${selectedBrand}-${index}`} product={product} />
+                      <div key={`${selectedBrand}-${index}`} className={styles.gridItem}>
+                        <ProductCard product={product} />
+                      </div>
                     ))}
                   </div>
                 </div>

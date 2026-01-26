@@ -21,7 +21,7 @@ const Cart: React.FC = () => {
 
   const handleCheckout = () => {
     if (cart.length === 0) return;
-
+ 
     const formatPrice = (price: number) => {
       return new Intl.NumberFormat('es-CR', { style: 'currency', currency: 'CRC', maximumFractionDigits: 0 }).format(price).replace('CRC', '₡');
     };

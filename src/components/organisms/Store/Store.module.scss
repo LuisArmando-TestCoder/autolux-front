@@ -45,7 +45,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  // Use minmax(0, 1fr) to ensure content doesn't force columns wider
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: v.$spacing-unit * 4;
 
   @media (max-width: 1024px) {
@@ -53,6 +54,27 @@
   }
   @media (max-width: 768px) {
      grid-template-columns: 1fr;
+  }
+}
+
+.gridItem {
+  // Default: 4 items per row (12 / 3 = 4)
+  grid-column: span 3;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:nth-child(-n+3) {
+    // First 3 items: 3 items per row (12 / 4 = 3)
+    grid-column: span 4;
+  }
+
+  @media (max-width: 1024px) {
+    grid-column: auto;
+    
+    &:nth-child(-n+3) {
+      grid-column: auto;
+    }
   }
 }
 
