@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.cosmicjs.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   sassOptions: {
