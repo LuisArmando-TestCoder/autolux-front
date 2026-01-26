@@ -5,6 +5,7 @@ export interface Product {
   tech_spec: string;
   price?: number;
   image?: string;
+  brand?: string;
 }
 
 export const inventory = {
