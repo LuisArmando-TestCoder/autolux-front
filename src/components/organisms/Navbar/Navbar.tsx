@@ -13,8 +13,6 @@ import { safeDecode } from '../../../utils/textUtils';
 const Navbar: React.FC = () => {
   const { settings } = useSettings();
 
-  if (!settings) return null;
-
   const { toggleCart, cart } = useCart();
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
   const [scrolled, setScrolled] = useState(false);
@@ -42,7 +40,7 @@ const Navbar: React.FC = () => {
     <nav className={`${styles.navbar} ${scrolled ? styles['navbar--scrolled'] : ''} ${hidden ? styles['navbar--hidden'] : ''}`}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          {settings.footer_logo ? (
+          {settings?.footer_logo ? (
             <Image 
               src={safeDecode(settings.footer_logo.imgix_url || settings.footer_logo.url)} 
               alt="Autolux Logo" 
@@ -66,7 +64,7 @@ const Navbar: React.FC = () => {
               <FaShoppingCart />
               {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
             </button>
-            <Button label="Cotizar" variant="primary" onClick={() => window.open('https://wa.me/50684196936?text=' + encodeURIComponent('Hola, quisiera cotizar un servicio.'), '_blank')} />
+            <Button className={styles.desktopOnly} label="Cotizar" variant="primary" onClick={() => window.open('https://wa.me/50684196936?text=' + encodeURIComponent('Hola, quisiera cotizar un servicio.'), '_blank')} />
         </div>
       </div>
     </nav>
