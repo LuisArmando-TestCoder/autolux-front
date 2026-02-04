@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './Store.module.scss';
 import ProductCard from '../../molecules/ProductCard';
 import Button from '../../atoms/Button';
@@ -54,13 +55,28 @@ interface BrandsResponse {
 type InventoryMasterList = Record<string, Record<string, Product[]>>;
 
 const Store: React.FC = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedBrand = searchParams.get('brand');
+
   const [masterList, setMasterList] = useState<InventoryMasterList>({});
   const [brands, setBrands] = useState<BrandItem[]>([]);
   const [extraBrands, setExtraBrands] = useState<BrandItem[]>([]);
-  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const [hoveredBrand, setHoveredBrand] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [allProducts, setAllProducts] = useState<Product[]>([]);
+
+  const updateBrandParam = (brand: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('brand', brand);
+    router.push(`?${params.toString()}`);
+  };
+
+  const removeBrandParam = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('brand');
+    router.push(`?${params.toString()}`);
+  };
 
   const getProductsForBrand = (brandName: string) => {
     const products: any[] = [];
@@ -209,7 +225,7 @@ const Store: React.FC = () => {
                 <div 
                   key={brand.nombre_de_marca} 
                   className={styles.brandCard}
-                  onClick={() => setSelectedBrand(brand.nombre_de_marca)}
+                  onClick={() => updateBrandParam(brand.nombre_de_marca)}
                 >
                   {brand.imagen ? (
                     <div className={styles.brandImageWrapper}>
@@ -253,7 +269,7 @@ const Store: React.FC = () => {
                     >
                       <div 
                         className={styles.extraBrandCard}
-                        onClick={() => setSelectedBrand(brand.nombre_de_marca)}
+                        onClick={() => updateBrandParam(brand.nombre_de_marca)}
                       >
                         <h3>{brand.nombre_de_marca}</h3>
                       </div>
@@ -274,7 +290,7 @@ const Store: React.FC = () => {
             <div className={styles.backButtonWrapper}>
               <Button 
                 label="Back to Brands" 
-                onClick={() => setSelectedBrand(null)}
+                onClick={removeBrandParam}
                 variant="secondary"
               />
             </div>

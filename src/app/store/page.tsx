@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import Navbar from '../../components/organisms/Navbar';
 import Footer from '../../components/organisms/Footer';
 import FloatingWhatsapp from '../../components/atoms/FloatingWhatsapp';
@@ -12,7 +12,9 @@ export default function StorePage() {
     <main>
       <Navbar />
       <StoreHero />
-      <Store />
+      <Suspense fallback={<div>Loading store...</div>}>
+        <Store />
+      </Suspense>
       <Footer />
       <FloatingWhatsapp />
     </main>
