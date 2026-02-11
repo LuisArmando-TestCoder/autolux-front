@@ -5,6 +5,7 @@ import { Product } from '../../../data/inventory';
 import { useCart } from '../../../context/CartContext';
 import AmountInput from '../../atoms/AmountInput';
 import Image from 'next/image';
+import { FaEye } from 'react-icons/fa';
 
 interface ProductCardProps {
   product: Product;
@@ -44,7 +45,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <h3 className={styles.title}>{product.product}</h3>
         </div>
         
-        <p className={styles.techSpec}>{product.tech_spec}</p>
+        <div className={styles.techSpec}>
+          {product.tech_spec}
+        </div>
         
         <div className={styles.priceTag}>
           {formattedPrice}
