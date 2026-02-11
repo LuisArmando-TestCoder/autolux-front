@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import styles from './Footer.module.scss';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaInstagram, FaFacebook } from 'react-icons/fa';

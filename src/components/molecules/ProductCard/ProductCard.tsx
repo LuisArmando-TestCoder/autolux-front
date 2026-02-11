@@ -5,6 +5,7 @@ import { Product } from '../../../data/inventory';
 import { useCart } from '../../../context/CartContext';
 import AmountInput from '../../atoms/AmountInput';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FaEye } from 'react-icons/fa';
 
 interface ProductCardProps {
@@ -26,17 +27,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className={styles.card}>
       <div className={styles.imageContainer}>
-        {product.image ? (
-          <Image 
-            src={product.image} 
-            alt={product.product} 
-            fill 
-            className={styles.productImage}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        ) : (
-          <div className={styles.placeholderImage}>No Image</div>
-        )}
+        <Link href={`/store/${encodeURIComponent(product.product.trim())}`} style={{ display: 'block', width: '100%', height: '100%', position: 'relative' }}>
+          {product.image ? (
+            <Image 
+              src={product.image} 
+              alt={product.product} 
+              fill 
+              className={styles.productImage}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          ) : (
+            <div className={styles.placeholderImage}>No Image</div>
+          )}
+        </Link>
       </div>
       
       <div className={styles.content}>
@@ -47,6 +50,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         
         <div className={styles.techSpec}>
           {product.tech_spec}
+          <Link href={`/store/${encodeURIComponent(product.product.trim())}`} className={styles.seeMoreBtn} aria-label="See more">
+            <FaEye />
+          </Link>
         </div>
         
         <div className={styles.priceTag}>
