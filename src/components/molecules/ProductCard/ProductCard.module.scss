@@ -96,7 +96,6 @@
   line-height: 1.5;
   margin: 0;
   flex-grow: 1;
-  padding-right: .5rem;
   max-height: 6rem;
   overflow-y: auto;
   position: relative;
@@ -110,14 +109,14 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 2px;
   }
 }
 
 .seeMoreBtn {
   position: sticky;
-  top: 0;
+  bottom: 0;
   float: right;
   margin-top: -2rem;
   margin-bottom: 0.5rem;
@@ -181,4 +180,26 @@
   color: rgba($white, 0.4);
   text-align: center;
   font-style: italic;
+}
+
+.stockStatus {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.inStock {
+  @extend .stockStatus;
+  color: #4caf50;
+}
+
+.lowStock {
+  @extend .stockStatus;
+  color: #ff9800;
+}
+
+.outOfStock {
+  @extend .stockStatus;
+  color: #f44336;
 }

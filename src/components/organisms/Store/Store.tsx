@@ -19,6 +19,7 @@ interface ProductMetadata {
   };
   tech_spec: string;
   price?: number;
+  stock?: number;
   product_image?: {
     url: string;
     imgix_url: string;
@@ -136,6 +137,7 @@ const Store: React.FC = () => {
               type: obj.metadata.product_type.value,
               tech_spec: obj.metadata.tech_spec,
               price: obj.metadata.price,
+              stock: obj.metadata.stock,
               image: obj.metadata.product_image?.imgix_url || obj.metadata.product_image?.url,
               brand: obj.metadata.brand.value
             };

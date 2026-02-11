@@ -147,3 +147,21 @@
     background: rgba(255, 255, 255, 0.1);
   }
 }
+
+.stockStatus {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.inStock {
+  color: #4caf50;
+}
+
+.lowStock {
+  color: #ff9800;
+}
+
+.outOfStock {
+  color: #f44336;
+}

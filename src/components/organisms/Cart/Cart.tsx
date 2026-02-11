@@ -100,8 +100,8 @@ const Cart: React.FC = () => {
       <div 
         ref={receiptRef}
         style={{
-          position: 'fixed',
-          top: '-9999px',
+          position: 'absolute',
+          top: 0,
           left: '-9999px',
           width: '600px',
           padding: '40px',

@@ -18,7 +18,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const { cart, addToCart, updateQuantity } = useCart();
   const cartItem = cart.find(item => item.product.product === product.product);
 
+  const stock = product.stock ?? 0;
+  const isOutOfStock = stock === 0;
+  const isLowStock = stock > 0 && stock <= 10;
+
   const handleAdd = () => {
+    if (isOutOfStock) return;
     addToCart(product, 1);
   };
 
@@ -54,12 +59,29 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           {formattedPrice}
         </div>
 
+        <div className={styles.stockStatus}>
+          {isOutOfStock ? (
+             <span className={styles.outOfStock}>Agotado</span>
+          ) : isLowStock ? (
+             <span className={styles.lowStock}>¡Solo quedan {stock}!</span>
+          ) : (
+             <span className={styles.inStock}>Disponible</span>
+          )}
+        </div>
+
         <div className={styles.description}>
           {product.tech_spec}
         </div>
 
         <div className={styles.actions}>
-          {cartItem ? (
+          {isOutOfStock ? (
+             <Button 
+                label="Agotado" 
+                variant="secondary" 
+                onClick={() => {}} 
+                style={{ padding: '12px 24px', fontSize: '1rem', width: 'auto', opacity: 0.5, cursor: 'not-allowed' }} 
+             />
+          ) : cartItem ? (
             <AmountInput 
               value={cartItem.quantity} 
               onChange={(val) => updateQuantity(product.product, val)} 

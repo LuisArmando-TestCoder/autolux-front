@@ -5,19 +5,29 @@ import { Product } from '../../../data/inventory';
 import { useCart } from '../../../context/CartContext';
 import AmountInput from '../../atoms/AmountInput';
 import Image from 'next/image';
-import Link from 'next/link';
-import { FaEye } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const router = useRouter();
   const { cart, addToCart, updateQuantity } = useCart();
   const cartItem = cart.find(item => item.product.product === product.product);
 
-  const handleAdd = () => {
+  const stock = product.stock ?? 0;
+  const isOutOfStock = stock === 0;
+  const isLowStock = stock > 0 && stock <= 10;
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isOutOfStock) return;
     addToCart(product, 1);
+  };
+
+  const handleCardClick = () => {
+    router.push(`/store/${encodeURIComponent(product.product.trim())}`);
   };
 
   const formattedPrice = product.price 
@@ -25,21 +35,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     : 'Consultar';
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleCardClick} style={{ cursor: 'pointer' }}>
       <div className={styles.imageContainer}>
-        <Link href={`/store/${encodeURIComponent(product.product.trim())}`} style={{ display: 'block', width: '100%', height: '100%', position: 'relative' }}>
-          {product.image ? (
-            <Image 
-              src={product.image} 
-              alt={product.product} 
-              fill 
-              className={styles.productImage}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          ) : (
-            <div className={styles.placeholderImage}>No Image</div>
-          )}
-        </Link>
+        {product.image ? (
+          <Image 
+            src={product.image} 
+            alt={product.product} 
+            fill 
+            className={styles.productImage}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        ) : (
+          <div className={styles.placeholderImage}>No Image</div>
+        )}
       </div>
       
       <div className={styles.content}>
@@ -48,20 +56,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <h3 className={styles.title}>{product.product}</h3>
         </div>
         
-        <div className={styles.techSpec}>
-          {product.tech_spec}
-          <Link href={`/store/${encodeURIComponent(product.product.trim())}`} className={styles.seeMoreBtn} aria-label="See more">
-            <FaEye />
-          </Link>
-        </div>
-        
         <div className={styles.priceTag}>
           {formattedPrice}
         </div>
 
-        <div className={styles.footer}>
+        <div className={styles.footer} onClick={(e) => e.stopPropagation()}>
           <span className={styles.type}>{product.type}</span>
-          {cartItem ? (
+          
+          {isOutOfStock ? (
+             <div className={styles.outOfStock}>Agotado</div>
+          ) : isLowStock ? (
+             <div className={styles.lowStock}>¡Solo quedan {stock}!</div>
+          ) : (
+             <div className={styles.inStock}>Disponible</div>
+          )}
+
+          {isOutOfStock ? (
+             <Button label="Agotado" variant="secondary" onClick={(e) => e.stopPropagation()} style={{ padding: '8px 16px', fontSize: '0.9rem', width: '100%', opacity: 0.5, cursor: 'not-allowed' }} />
+          ) : cartItem ? (
             <AmountInput 
               value={cartItem.quantity} 
               onChange={(val) => updateQuantity(product.product, val)} 

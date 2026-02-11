@@ -60,6 +60,7 @@ export const fetchProductByName = async (name: string): Promise<Product | null> 
         type: obj.metadata.product_type.value,
         tech_spec: obj.metadata.tech_spec,
         price: obj.metadata.price,
+        stock: obj.metadata.stock,
         image: obj.metadata.product_image?.imgix_url || obj.metadata.product_image?.url,
         brand: obj.metadata.brand.value
       };
